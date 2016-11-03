@@ -17,7 +17,7 @@ public final class StatementEnhancer {
     }
 
     /**
-     * If het object is not of type {@link String}, {@link Date} or {@link LocalDate}
+     * If het object is not of type {@link String}, {@link Date}, {@link LocalDate} or {@link Number}
      * the {@code toString()} method is called and the outcome is escaped like a {@link String} value.
      */
     public static String escapeValue(Object value) {

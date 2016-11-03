@@ -1,3 +1,5 @@
+# Simple SQL Builder
+
 ## Synopsis
 
 The Simple SQL Builder brings a fluent api to build database statements and queries.
