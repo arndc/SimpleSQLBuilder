@@ -9,9 +9,6 @@ import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-/**
- * Created by ArneD on 27/10/16.
- */
 public class StatementEnhancerTest {
     @Test
     public void testTrimAStatementWithMultipleConsecutiveWhiteSpaces() throws Exception {
@@ -98,7 +95,7 @@ public class StatementEnhancerTest {
         class CustomObject {
             private String customText;
 
-            public CustomObject(String customText) {
+            private CustomObject(String customText) {
                 this.customText = customText;
             }
 

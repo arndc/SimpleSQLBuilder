@@ -9,9 +9,6 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
-/**
- * Created by ArneD on 23/10/16.
- */
 public class QueryMatcher extends TypeSafeDiagnosingMatcher<Query> {
     private Query expectedQuery;
     private final Matcher<? super String> select;

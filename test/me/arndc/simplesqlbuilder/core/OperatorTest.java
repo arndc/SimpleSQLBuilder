@@ -7,9 +7,6 @@ import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-/**
- * Created by ArneD on 24/10/16.
- */
 public class OperatorTest {
     @Test
     public void testOperatorBetweenTwoStrings() throws Exception {

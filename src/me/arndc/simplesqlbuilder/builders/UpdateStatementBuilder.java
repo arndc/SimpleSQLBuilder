@@ -5,7 +5,9 @@ import me.arndc.simplesqlbuilder.core.Table;
 import me.arndc.simplesqlbuilder.core.UpdateStatement;
 
 /**
- * Created by ArneD on 02/11/16.
+ * This builder class provides a fluent way to build a {@link UpdateStatement}.
+ *
+ * @see UpdateStatement
  */
 public class UpdateStatementBuilder {
     private UpdateStatement updateStatement;
