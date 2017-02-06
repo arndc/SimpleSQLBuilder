@@ -67,7 +67,8 @@ public final class Query implements Statement {
 
         statement.append(select)
                  .append(from.length() > 0 ? " FROM " + from : "")
-                 .append(whereClause.length() > 0 ? " WHERE " + whereClause : "");
+                 .append(whereClause.length() > 0 ? " WHERE " + whereClause : "")
+                 .append(orderBy.length() > 0 ? " ORDER BY " + orderBy : "");
 
         if (limit > 0) {
             statement.append(" LIMIT ").append(limit);
@@ -76,10 +77,7 @@ public final class Query implements Statement {
                 statement.append(" OFFSET ").append(offset);
         }
 
-        statement.append(orderBy.length() > 0 ? " ORDER BY " + orderBy : "")
-                 .append(";");
-
-        return trim(statement.toString());
+        return trim(statement.append(";").toString());
     }
 
     public enum Order {
