@@ -116,8 +116,7 @@ public class QueryTest {
         query.setSelect(testColumnName, testColumnName);
         query.setFrom(testTableName);
 
-        String expectedQuery = String.format("SELECT %s, %s FROM %s;",
-                                             testColumnName, testColumnName, testTableName);
+        String expectedQuery = String.format("SELECT %s, %s FROM %s;", testColumnName, testColumnName, testTableName);
 
         // Act
         String statement = query.statement();
