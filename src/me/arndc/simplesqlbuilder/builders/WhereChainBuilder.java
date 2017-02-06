@@ -10,6 +10,9 @@ public final class WhereChainBuilder {
         this.whereClause = whereClause;
     }
 
+    public static WhereChainBuilder whereChain(String startWhereClause) {
+        return new WhereChainBuilder(startWhereClause);
+    }
 
     public WhereChainBuilder and(String extraClause) {
         bind("AND", extraClause);
@@ -21,16 +24,9 @@ public final class WhereChainBuilder {
         return this;
     }
 
-
     String end() {
         return whereClause;
     }
-
-
-    public static WhereChainBuilder whereChain(String startWhereClause) {
-        return new WhereChainBuilder(startWhereClause);
-    }
-
 
     private void bind(String binder, String extraClause) {
         this.whereClause += (" " + binder + " ") + extraClause;

@@ -4,7 +4,11 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 final class MismatchReporter {
-    static void reportMismatch(String name, Matcher<?> matcher, Object item, Description mismatchDescription, boolean firstMismatch) {
+    static void reportMismatch(String name,
+                               Matcher<?> matcher,
+                               Object item,
+                               Description mismatchDescription,
+                               boolean firstMismatch) {
         if (!firstMismatch)
             mismatchDescription.appendText(", ");
 

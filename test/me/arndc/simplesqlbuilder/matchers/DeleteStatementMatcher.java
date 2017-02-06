@@ -11,14 +11,19 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 public class DeleteStatementMatcher extends TypeSafeDiagnosingMatcher<DeleteStatement> {
-    private DeleteStatement expectedDeleteStatement;
     private final Matcher<? super String> tableName;
     private final Matcher<? super String> whereClause;
+    private DeleteStatement expectedDeleteStatement;
 
     public DeleteStatementMatcher(DeleteStatement expectedDelete) {
         this.expectedDeleteStatement = expectedDelete;
         tableName = is(equalTo(this.expectedDeleteStatement.getTableName()));
         whereClause = is(equalTo(this.expectedDeleteStatement.getWhereClause()));
+    }
+
+    @Factory
+    public static DeleteStatementMatcher isDeleteStatement(DeleteStatement expectedDeleteStatement) {
+        return new DeleteStatementMatcher(expectedDeleteStatement);
     }
 
     @Override
@@ -45,10 +50,5 @@ public class DeleteStatementMatcher extends TypeSafeDiagnosingMatcher<DeleteStat
                 .appendValue(expectedDeleteStatement.getTableName())
                 .appendText(" and a where clause ")
                 .appendValue(expectedDeleteStatement.getWhereClause());
-    }
-
-    @Factory
-    public static DeleteStatementMatcher isDeleteStatement(DeleteStatement expectedDeleteStatement) {
-        return new DeleteStatementMatcher(expectedDeleteStatement);
     }
 }

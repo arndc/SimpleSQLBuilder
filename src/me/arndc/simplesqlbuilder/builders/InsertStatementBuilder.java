@@ -16,6 +16,13 @@ public final class InsertStatementBuilder {
         insertStatement = new InsertStatement(tableName);
     }
 
+    public static InsertStatementBuilder insertInto(String tableName) {
+        return new InsertStatementBuilder(tableName);
+    }
+
+    public static InsertStatementBuilder insertInto(Table table) {
+        return insertInto(table.getName());
+    }
 
     public InsertStatementBuilder withValue(String columnName, Object value) {
         insertStatement.addValue(columnName, value);
@@ -26,22 +33,12 @@ public final class InsertStatementBuilder {
         return withValue(column.getName(), value);
     }
 
-
     public InsertStatement build() {
         return insertStatement;
     }
 
     public String buildStatement() {
         return insertStatement.statement();
-    }
-
-
-    public static InsertStatementBuilder insertInto(String tableName) {
-        return new InsertStatementBuilder(tableName);
-    }
-
-    public static InsertStatementBuilder insertInto(Table table) {
-        return insertInto(table.getName());
     }
 
 }

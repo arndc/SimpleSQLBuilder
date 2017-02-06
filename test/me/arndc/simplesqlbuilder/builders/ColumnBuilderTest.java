@@ -13,7 +13,7 @@ public class ColumnBuilderTest {
 
     @Test
     public void testBuildingAColumn() throws Exception {
-        // Arrange
+        // Assign
         Column expectedColumn = new Column(testColumnName, testColumnDataType);
         ColumnBuilder builder = ColumnBuilder.newColumn(testColumnName, testColumnDataType);
 
@@ -27,7 +27,7 @@ public class ColumnBuilderTest {
 
     @Test
     public void testBuildingAColumnWithAPrimaryKey() throws Exception {
-        // Arrange
+        // Assign
         Column expectedColumn = new Column(testColumnName, testColumnDataType);
         expectedColumn.setPrimaryKey(true);
 
@@ -44,7 +44,7 @@ public class ColumnBuilderTest {
 
     @Test
     public void testBuildingAColumnWithAutoIncrementShouldOnlyWorkWhenThePrimaryKeyIsEnabled() throws Exception {
-        // Arrange
+        // Assign
         Column expectedColumn = new Column(testColumnName, testColumnDataType);
         expectedColumn.setAutoIncrement(false);
 
@@ -60,7 +60,7 @@ public class ColumnBuilderTest {
 
     @Test
     public void testBuildingAColumnWithAutoIncrementWhenThePrimaryKeyIsSetShouldSucceed() throws Exception {
-        // Arrange
+        // Assign
         Column expectedColumn = new Column(testColumnName, testColumnDataType);
         expectedColumn.setPrimaryKey(true);
         expectedColumn.setAutoIncrement(true);
@@ -78,7 +78,7 @@ public class ColumnBuilderTest {
 
     @Test
     public void testBuildingAColumnWithAPrimaryKeyAndUniqueShouldOnlyContainThePrimaryKey() throws Exception {
-        // Arrange
+        // Assign
         Column expectedColumn = new Column(testColumnName, testColumnDataType);
         expectedColumn.setPrimaryKey(true);
         expectedColumn.setUnique(false);

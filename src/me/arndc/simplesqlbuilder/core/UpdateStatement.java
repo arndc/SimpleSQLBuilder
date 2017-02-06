@@ -2,7 +2,6 @@ package me.arndc.simplesqlbuilder.core;
 
 import me.arndc.simplesqlbuilder.util.StatementEnhancer;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,11 +25,6 @@ public final class UpdateStatement implements Statement {
         this.setters.put(columnName, StatementEnhancer.escapeValue(value));
     }
 
-    public void setWhereClause(String whereClause) {
-        this.whereClause = whereClause;
-    }
-
-
     public String getTableName() {
         return tableName;
     }
@@ -43,14 +37,17 @@ public final class UpdateStatement implements Statement {
         return whereClause;
     }
 
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
+
     @Override
     public String statement() {
 
         String statement = "UPDATE " + tableName;
-
         statement += " SET " + setters.entrySet().stream()
-                .map(entry -> entry.getKey() + " = " + entry.getValue())
-                .collect(Collectors.joining(", "));
+                                      .map(entry -> entry.getKey() + " = " + entry.getValue())
+                                      .collect(Collectors.joining(", "));
 
         if (whereClause == null || whereClause.length() == 0)
             statement += ";";

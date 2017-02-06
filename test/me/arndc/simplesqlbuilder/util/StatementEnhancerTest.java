@@ -65,7 +65,7 @@ public class StatementEnhancerTest {
     @Test
     public void testEscapeADateValue() throws Exception {
         // Assign
-        LocalDate date =  LocalDate.of(2000, 12, 31);
+        LocalDate date = LocalDate.of(2000, 12, 31);
         Date value = Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         String expectedValue = "'2000-12-31'";
 
@@ -79,7 +79,7 @@ public class StatementEnhancerTest {
     @Test
     public void testEscapeALocalDateValue() throws Exception {
         // Assign
-        LocalDate value =  LocalDate.of(2000, 12, 31);
+        LocalDate value = LocalDate.of(2000, 12, 31);
         String expectedValue = "'2000-12-31'";
 
         // Act

@@ -10,10 +10,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 public class QueryMatcher extends TypeSafeDiagnosingMatcher<Query> {
-    private Query expectedQuery;
     private final Matcher<? super String> select;
     private final Matcher<? super String> from;
     private final Matcher<? super String> whereClause;
+    private Query expectedQuery;
 
     public QueryMatcher(Query expectedQuery) {
         this.expectedQuery = expectedQuery;
@@ -22,6 +22,10 @@ public class QueryMatcher extends TypeSafeDiagnosingMatcher<Query> {
         whereClause = is(equalTo(expectedQuery.getWhereClause()));
     }
 
+    @Factory
+    public static QueryMatcher isQuery(Query expectedQuery) {
+        return new QueryMatcher(expectedQuery);
+    }
 
     @Override
     protected boolean matchesSafely(Query query, Description description) {
@@ -54,10 +58,5 @@ public class QueryMatcher extends TypeSafeDiagnosingMatcher<Query> {
                 .appendValue(expectedQuery.getFrom())
                 .appendText(" and with a where clause of ")
                 .appendValue(expectedQuery.getWhereClause());
-    }
-
-    @Factory
-    public static QueryMatcher isQuery(Query expectedQuery) {
-        return new QueryMatcher(expectedQuery);
     }
 }

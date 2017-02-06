@@ -26,7 +26,7 @@ public class TableBuilderTest {
 
     @Test
     public void testBuildingATableWithOneColumn() throws Exception {
-        // Arrange
+        // Assign
         Table expectedTable = new Table(testTableName);
         expectedTable.addColumn(testColumn1);
 
@@ -40,7 +40,7 @@ public class TableBuilderTest {
 
     @Test
     public void testBuildingATableWithMultipleColumn() throws Exception {
-        // Arrange
+        // Assign
         Table expectedTable = new Table(testTableName);
         expectedTable.addColumn(testColumn1, testColumn2, testColumn3);
 

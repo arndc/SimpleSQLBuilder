@@ -20,6 +20,9 @@ public final class QueryBuilder {
         query = new Query();
     }
 
+    public static QueryBuilder newQuery() {
+        return new QueryBuilder();
+    }
 
     public QueryBuilder select(CharSequence... columnNames) {
         query.setSelect(columnNames);
@@ -30,12 +33,10 @@ public final class QueryBuilder {
         return select(Arrays.stream(columns).map(Column::getName).toArray(CharSequence[]::new));
     }
 
-
     public QueryBuilder selectAll() {
         query.setSelect();
         return this;
     }
-
 
     public QueryBuilder selectDistinct(CharSequence... columnNames) {
         query.setSelect(columnNames);
@@ -47,13 +48,11 @@ public final class QueryBuilder {
         return selectDistinct(Arrays.stream(columns).map(Column::getName).toArray(CharSequence[]::new));
     }
 
-
     public QueryBuilder selectDistinctAll() {
         query.setSelect();
         query.setDistinct(true);
         return this;
     }
-
 
     public QueryBuilder from(Table table) {
         return from(table.getName());
@@ -63,7 +62,6 @@ public final class QueryBuilder {
         query.setFrom(tableName);
         return this;
     }
-
 
     public QueryBuilder where(String whereClause) {
         query.setWhereClause(whereClause);
@@ -75,6 +73,16 @@ public final class QueryBuilder {
         return this;
     }
 
+    public QueryBuilder limit(long maxSize){
+        query.setLimit(maxSize);
+        return this;
+    }
+
+    public QueryBuilder limitWithOffset(long maxSize, long offset){
+        query.setLimit(maxSize);
+        query.setOffset(offset);
+        return this;
+    }
 
     public QueryBuilder orderBy(String columnName, Query.Order order) {
         query.setOrderBy(columnName, order);
@@ -85,17 +93,11 @@ public final class QueryBuilder {
         return orderBy(column.getName(), order);
     }
 
-
     public Query build() {
         return query;
     }
 
     public String buildStatement() {
         return query.statement();
-    }
-
-
-    public static QueryBuilder newQuery() {
-        return new QueryBuilder();
     }
 }

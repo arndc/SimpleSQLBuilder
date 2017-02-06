@@ -13,11 +13,11 @@ public class ColumnTest {
 
     @Test
     public void testCreateADefinition() throws Exception {
-        // Arrange
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
 
         String expectedDefinition = String.format("%s %s",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -29,12 +29,12 @@ public class ColumnTest {
 
     @Test
     public void testCreateADefinitionWithPrimaryKey() throws Exception {
-        // Arrange
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
         column.setPrimaryKey(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -45,13 +45,13 @@ public class ColumnTest {
 
     @Test
     public void testCreateADefinitionWithPrimaryKeyAndAutoIncrement() throws Exception {
-        // Arrange
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
         column.setPrimaryKey(true);
         column.setAutoIncrement(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY AUTOINCREMENT",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -62,12 +62,12 @@ public class ColumnTest {
 
     @Test
     public void testCreateADefinitionWithAutoIncrementOnlyShouldNotAddItToTheDefinition() throws Exception {
-        // Arrange
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
         column.setAutoIncrement(true);
 
         String expectedDefinition = String.format("%s %s",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -78,12 +78,12 @@ public class ColumnTest {
 
     @Test
     public void testCreateADefinitionWithUniqueConstraint() throws Exception {
-        // Arrange
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
         column.setUnique(true);
 
         String expectedDefinition = String.format("%s %s UNIQUE",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();
@@ -93,14 +93,15 @@ public class ColumnTest {
     }
 
     @Test
-    public void testCreateADefinitionWithAPrimaryKeyAndAUniqueConstraintShouldOnlyContainThePrimaryKey() throws Exception {
-        // Arrange
+    public void testCreateADefinitionWithAPrimaryKeyAndAUniqueConstraintShouldOnlyContainThePrimaryKey()
+            throws Exception {
+        // Assign
         Column column = new Column(testColumnName, testColumnDataType);
         column.setPrimaryKey(true);
         column.setUnique(true);
 
         String expectedDefinition = String.format("%s %s PRIMARY KEY",
-                testColumnName, testColumnDataType);
+                                                  testColumnName, testColumnDataType);
 
         // Act
         String definition = column.createDefinition();

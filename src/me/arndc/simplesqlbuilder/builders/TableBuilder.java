@@ -20,6 +20,9 @@ public final class TableBuilder {
         this.table = table;
     }
 
+    public static TableBuilder newTable(String name) {
+        return new TableBuilder(name);
+    }
 
     public TableBuilder withColumn(Column column) {
         table.addColumn(column);
@@ -30,13 +33,7 @@ public final class TableBuilder {
         return withColumn(columnBuilder.build());
     }
 
-
     public Table build() {
         return table;
-    }
-
-
-    public static TableBuilder newTable(String name) {
-        return new TableBuilder(name);
     }
 }

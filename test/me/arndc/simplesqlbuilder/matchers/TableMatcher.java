@@ -10,14 +10,19 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 public class TableMatcher extends TypeSafeDiagnosingMatcher<Table> {
-    private Table expectedTable;
     private final Matcher<? super String> name;
     private final Matcher<? super Integer> columnCount;
+    private Table expectedTable;
 
     private TableMatcher(Table expectedTable) {
         this.expectedTable = expectedTable;
         name = is(equalTo(expectedTable.getName()));
         columnCount = is(expectedTable.getColumns().size());
+    }
+
+    @Factory
+    public static TableMatcher isTable(Table expectedTable) {
+        return new TableMatcher(expectedTable);
     }
 
     @Override
@@ -30,7 +35,8 @@ public class TableMatcher extends TypeSafeDiagnosingMatcher<Table> {
         }
 
         if (!columnCount.matches(table.getColumns().size())) {
-            MismatchReporter.reportMismatch("column-count", columnCount, table.getColumns().size(), description, matches);
+            MismatchReporter
+                    .reportMismatch("column-count", columnCount, table.getColumns().size(), description, matches);
             matches = false;
         }
 
@@ -44,11 +50,5 @@ public class TableMatcher extends TypeSafeDiagnosingMatcher<Table> {
                 .appendValue(expectedTable.getName())
                 .appendText(" with the following column-count ")
                 .appendValue(expectedTable.getColumns().size());
-    }
-
-
-    @Factory
-    public static TableMatcher isTable(Table expectedTable) {
-        return new TableMatcher(expectedTable);
     }
 }

@@ -24,15 +24,15 @@ public class TableTest {
 
     @Test
     public void testCreateShouldReturnAFormattedCreateTableStatement() throws Exception {
-        // Arrange
+        // Assign
         Table table = new Table(testTableName);
         table.addColumn(testColumn1, testColumn2);
         testColumn1.setPrimaryKey(true);
         testColumn1.setAutoIncrement(true);
         String expectedCreateStatement = String.format("CREATE TABLE %s(%s %s PRIMARY KEY AUTOINCREMENT, %s %s);",
-                testTableName,
-                testColumn1.getName(), testColumn1.getDataType(),
-                testColumn2.getName(), testColumn2.getDataType());
+                                                       testTableName,
+                                                       testColumn1.getName(), testColumn1.getDataType(),
+                                                       testColumn2.getName(), testColumn2.getDataType());
 
         // Act
         String createStatement = table.createStatement();
@@ -43,7 +43,7 @@ public class TableTest {
 
     @Test
     public void testDropTableShouldReturnAFormattedDropTableStatement() throws Exception {
-        // Arrange
+        // Assign
         Table table = new Table(testTableName);
         String expectedDropStatement = String.format("DROP TABLE IF EXISTS %s;", testTableName);
 
@@ -56,7 +56,7 @@ public class TableTest {
 
     @Test
     public void testAddingMultipleColumnsAtOnce() throws Exception {
-        // Arrange
+        // Assign
         Table table = new Table(testTableName);
 
         // Act
@@ -68,7 +68,7 @@ public class TableTest {
 
     @Test
     public void testRetrieveColumnWithColumnNameAsKey() throws Exception {
-        // Arrange
+        // Assign
         Table table = new Table(testTableName);
         table.addColumn(testColumn1, testColumn2);
 

@@ -25,7 +25,7 @@ public class InsertStatementBuilderTest {
 
     @Test
     public void testBuildingAnInsertStatement() throws Exception {
-        // Arrange
+        // Assign
         String value1 = "val01", value2 = "val02";
         InsertStatement expected = new InsertStatement(testTable.getName());
         expected.addValue(testColumn1.getName(), value1);

@@ -15,28 +15,25 @@ public final class DeleteStatementBuilder {
         this.deleteStatement = new DeleteStatement(tableName);
     }
 
+    public static DeleteStatementBuilder deleteFrom(String tableName) {
+        return new DeleteStatementBuilder(tableName);
+    }
 
-    public DeleteStatementBuilder where(String whereClause){
+    public static DeleteStatementBuilder deleteFrom(Table table) {
+        return deleteFrom(table.getName());
+    }
+
+    public DeleteStatementBuilder where(String whereClause) {
         deleteStatement.setWhereClause(whereClause);
         return this;
     }
 
-
-    public DeleteStatement build(){
+    public DeleteStatement build() {
         return deleteStatement;
     }
 
-    public String buildStatement(){
+    public String buildStatement() {
         return deleteStatement.statement();
-    }
-
-
-    public static DeleteStatementBuilder deleteFrom(String tableName){
-        return new DeleteStatementBuilder(tableName);
-    }
-
-    public static DeleteStatementBuilder deleteFrom(Table table){
-        return deleteFrom(table.getName());
     }
 
 }

@@ -16,16 +16,22 @@ public class UpdateStatementBuilder {
         updateStatement = new UpdateStatement(tableName);
     }
 
+    public static UpdateStatementBuilder updateFrom(String tableName) {
+        return new UpdateStatementBuilder(tableName);
+    }
 
-    public UpdateStatementBuilder set(String columnName, Object value){
+    public static UpdateStatementBuilder updateFrom(Table table) {
+        return updateFrom(table.getName());
+    }
+
+    public UpdateStatementBuilder set(String columnName, Object value) {
         updateStatement.addSetter(columnName, value);
         return this;
     }
 
-    public UpdateStatementBuilder set(Column column, Object value){
+    public UpdateStatementBuilder set(Column column, Object value) {
         return set(column.getName(), value);
     }
-
 
     public UpdateStatementBuilder where(String whereClause) {
         updateStatement.setWhereClause(whereClause);
@@ -37,21 +43,11 @@ public class UpdateStatementBuilder {
         return this;
     }
 
-
     public UpdateStatement build() {
         return updateStatement;
     }
 
     public String buildStatement() {
         return updateStatement.statement();
-    }
-
-
-    public static UpdateStatementBuilder updateFrom(String tableName){
-        return new UpdateStatementBuilder(tableName);
-    }
-
-    public static UpdateStatementBuilder updateFrom(Table table){
-        return updateFrom(table.getName());
     }
 }

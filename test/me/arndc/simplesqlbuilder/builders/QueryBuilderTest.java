@@ -30,7 +30,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithSelectAll() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect("*");
         expectedQuery.setFrom(testTable.getName());
@@ -38,9 +38,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectAll()
-                .from(testTable.getName())
-                .where(testWhereClause);
+                                           .selectAll()
+                                           .from(testTable.getName())
+                                           .where(testWhereClause);
 
         Query query = builder.build();
 
@@ -50,7 +50,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithOneColumn() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect(testColumnName);
         expectedQuery.setFrom(testTable.getName());
@@ -58,9 +58,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .select(testColumnName)
-                .from(testTable)
-                .where(testWhereClause);
+                                           .select(testColumnName)
+                                           .from(testTable)
+                                           .where(testWhereClause);
 
         Query query = builder.build();
 
@@ -70,7 +70,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithMultipleColumns() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect(testColumn1.getName(), testColumn1.getName());
         expectedQuery.setFrom(testTable.getName());
@@ -78,9 +78,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .select(testColumn1, testColumn1)
-                .from(testTable)
-                .where(testColumn1.is(Operator.between("one", "other")));
+                                           .select(testColumn1, testColumn1)
+                                           .from(testTable)
+                                           .where(testColumn1.is(Operator.between("one", "other")));
 
         Query query = builder.build();
 
@@ -90,7 +90,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithSelectDistinct() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect(testColumn1.getName(), testColumn1.getName());
         expectedQuery.setDistinct(true);
@@ -98,8 +98,8 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinct(testColumn1, testColumn1)
-                .from(testTable);
+                                           .selectDistinct(testColumn1, testColumn1)
+                                           .from(testTable);
 
         Query query = builder.build();
 
@@ -109,7 +109,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithSelectDistinctAll() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect();
         expectedQuery.setDistinct(true);
@@ -117,8 +117,8 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable);
+                                           .selectDistinctAll()
+                                           .from(testTable);
 
         Query query = builder.build();
 
@@ -128,7 +128,7 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryWithOrderByAscending() throws Exception {
-        // Arrange
+        // Assign
         Query expectedQuery = new Query();
         expectedQuery.setSelect();
         expectedQuery.setFrom(testTable.getName());
@@ -136,9 +136,9 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable)
-                .orderBy(testColumn1, Query.Order.ASCENDING);
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .orderBy(testColumn1, Query.Order.ASCENDING);
 
         Query query = builder.build();
 
@@ -148,12 +148,13 @@ public class QueryBuilderTest {
 
     @Test
     public void testBuildingAQueryByUsingTheWhereChainBuilder() throws Exception {
-        // Arrange
+        // Assign
         String val01 = "Value";
         LocalDate date01 = LocalDate.of(2016, 11, 1);
         LocalDate date02 = LocalDate.of(2017, 12, 2);
 
-        WhereChainBuilder whereChainBuilder = WhereChainBuilder.whereChain(testColumn1.is(Operator.equalsTo(val01))).and(testColumn1.is(Operator.between(date01, date02)));
+        WhereChainBuilder whereChainBuilder = WhereChainBuilder.whereChain(testColumn1.is(Operator.equalsTo(val01)))
+                                                               .and(testColumn1.is(Operator.between(date01, date02)));
 
         Query expectedQuery = new Query();
         expectedQuery.setSelect();
@@ -162,9 +163,55 @@ public class QueryBuilderTest {
 
         // Act
         QueryBuilder builder = QueryBuilder.newQuery()
-                .selectDistinctAll()
-                .from(testTable)
-                .where(whereChainBuilder);
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .where(whereChainBuilder);
+
+        Query query = builder.build();
+
+        // Assert
+        assertThat(query, is(QueryMatcher.isQuery(expectedQuery)));
+    }
+
+    @Test
+    public void testBuildingAQueryWithLimit() throws Exception {
+        // Assign
+        long limit = 5;
+
+        Query expectedQuery = new Query();
+        expectedQuery.setSelect();
+        expectedQuery.setFrom(testTable.getName());
+        expectedQuery.setLimit(limit);
+
+        // Act
+        QueryBuilder builder = QueryBuilder.newQuery()
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .limit(5);
+
+        Query query = builder.build();
+
+        // Assert
+        assertThat(query, is(QueryMatcher.isQuery(expectedQuery)));
+    }
+
+    @Test
+    public void testBuildingAQueryWithLimitAndOffset() throws Exception {
+        // Assign
+        long limit = 5;
+        long offset = 1;
+
+        Query expectedQuery = new Query();
+        expectedQuery.setSelect();
+        expectedQuery.setFrom(testTable.getName());
+        expectedQuery.setLimit(limit);
+        expectedQuery.setOffset(offset);
+
+        // Act
+        QueryBuilder builder = QueryBuilder.newQuery()
+                                           .selectDistinctAll()
+                                           .from(testTable)
+                                           .limitWithOffset(5, 1);
 
         Query query = builder.build();
 

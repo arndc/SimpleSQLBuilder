@@ -26,7 +26,7 @@ public class DeleteStatementBuilderTest {
 
     @Test
     public void testBuildingADeleteStatement() throws Exception {
-        // Arrange
+        // Assign
         DeleteStatement expected = new DeleteStatement(testTable.getName());
         expected.setWhereClause(testColumn1.is(Operator.between("A", "B")));
 

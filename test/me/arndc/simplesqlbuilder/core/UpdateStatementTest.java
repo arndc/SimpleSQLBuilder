@@ -44,7 +44,8 @@ public class UpdateStatementTest {
         String value = "val";
 
         String expected = "UPDATE " + testTableName
-                + " SET " + testColumn1.getName() + " = '" + value + "', " + testColumn2.getName() + " = '" + value + "'"
+                + " SET " + testColumn1.getName() + " = '" + value + "', " + testColumn2
+                .getName() + " = '" + value + "'"
                 + " WHERE " + testColumn1.getName() + " BETWEEN 'A' AND 'B';";
 
         // Act

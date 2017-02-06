@@ -15,17 +15,16 @@ public final class DeleteStatement implements Statement {
         this.tableName = tableName;
     }
 
-    public void setWhereClause(String whereClause) {
-        this.whereClause = whereClause;
-    }
-
-
     public String getTableName() {
         return tableName;
     }
 
     public String getWhereClause() {
         return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
     }
 
     @Override

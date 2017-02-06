@@ -10,11 +10,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
 public class ColumnMatcher extends TypeSafeDiagnosingMatcher<Column> {
-    private Column expectedColumn;
     private final Matcher<? super String> name;
     private final Matcher<? super Boolean> primaryKey;
     private final Matcher<? super Boolean> autoincrement;
     private final Matcher<? super Boolean> unique;
+    private Column expectedColumn;
 
 
     private ColumnMatcher(Column expectedColumn) {
@@ -23,6 +23,11 @@ public class ColumnMatcher extends TypeSafeDiagnosingMatcher<Column> {
         primaryKey = is(expectedColumn.hasPrimaryKey());
         autoincrement = is(expectedColumn.hasAutoIncrement());
         unique = is(expectedColumn.isUnique());
+    }
+
+    @Factory
+    public static ColumnMatcher isColumn(Column expectedColumn) {
+        return new ColumnMatcher(expectedColumn);
     }
 
     @Override
@@ -40,7 +45,8 @@ public class ColumnMatcher extends TypeSafeDiagnosingMatcher<Column> {
         }
 
         if (!autoincrement.matches(column.hasAutoIncrement())) {
-            MismatchReporter.reportMismatch("auto increment", autoincrement, column.hasAutoIncrement(), description, matches);
+            MismatchReporter
+                    .reportMismatch("auto increment", autoincrement, column.hasAutoIncrement(), description, matches);
             matches = false;
         }
 
@@ -57,11 +63,5 @@ public class ColumnMatcher extends TypeSafeDiagnosingMatcher<Column> {
         description
                 .appendText(" a column with a name ")
                 .appendValue(expectedColumn.getName());
-    }
-
-
-    @Factory
-    public static ColumnMatcher isColumn(Column expectedColumn) {
-        return new ColumnMatcher(expectedColumn);
     }
 }

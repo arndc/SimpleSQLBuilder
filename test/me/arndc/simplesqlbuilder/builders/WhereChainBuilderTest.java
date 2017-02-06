@@ -8,7 +8,7 @@ public class WhereChainBuilderTest {
 
     @Test
     public void testBuildingAWhereChain() throws Exception {
-        // Arrange
+        // Assign
         String expectedWhereClause = "column = \"test\""
                 .concat(" AND ")
                 .concat("column IS BETWEEN \"A\" AND \"B\"")

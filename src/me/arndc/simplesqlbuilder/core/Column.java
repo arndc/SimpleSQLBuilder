@@ -26,11 +26,6 @@ public final class Column {
         this.autoIncrement = autoIncrement;
     }
 
-    public void setUnique(boolean unique) {
-        this.unique = unique;
-    }
-
-
     public String getName() {
         return name;
     }
@@ -51,6 +46,9 @@ public final class Column {
         return unique;
     }
 
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+    }
 
     String createDefinition() {
         String declaration = String.format("%s %s", this.name, this.dataType);

@@ -4,8 +4,8 @@ import me.arndc.simplesqlbuilder.util.StatementEnhancer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static me.arndc.simplesqlbuilder.util.StatementEnhancer.trim;
 
 /**
@@ -36,8 +36,11 @@ public final class InsertStatement implements Statement {
 
     @Override
     public String statement() {
-        String columns = this.values.keySet().stream().collect(Collectors.joining(", ", "(", ")"));
-        String values = this.values.values().stream().map(StatementEnhancer::escapeValue).collect(Collectors.joining(", ", "(", ")"));
+        String columns = this.values.keySet().stream()
+                                    .collect(joining(", ", "(", ")"));
+        String values = this.values.values().stream()
+                                   .map(StatementEnhancer::escapeValue)
+                                   .collect(joining(", ", "(", ")"));
 
         String statement = "INSERT INTO " + tableName + " " + columns + " VALUES " + values + ";";
         return trim(statement);

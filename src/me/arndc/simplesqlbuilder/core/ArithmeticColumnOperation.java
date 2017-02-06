@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
  */
 public final class ArithmeticColumnOperation {
     public static String multiply(Column... columns) {
-        return Arrays.stream(columns)
-                .map(Column::getName)
-                .collect(Collectors.joining(" * "));
+        return Arrays.stream(columns).map(Column::getName).collect(Collectors.joining(" * "));
     }
 
     public static String multiply(CharSequence... columnNames) {
